@@ -80,19 +80,24 @@ export function cardToString(c: Card): string {
   return `${rankToString(c.rank)}${suitToString(c.suit, false)}`;
 }
 
-export function cardArrayToString(cs: ReadonlyArray<Card>,
-  newLines?: boolean): string {
+export function cardArrayToString(
+  cs: ReadonlyArray<Card>,
+  newLines?: boolean
+): string {
+  const compareRanks = (c1: Card, c2: Card): number => c2.rank - c1.rank;
 
-  const compareRanks = (c1: Card, c2: Card): number => (c2.rank - c1.rank);
-
-  const spades: Card[] = cs.filter(
-    (c: Card) => c.suit === "S").sort(compareRanks);
-  const hearts: Card[] = cs.filter(
-    (c: Card) => c.suit === "H").sort(compareRanks);
-  const diamonds: Card[] = cs.filter(
-    (c: Card) => c.suit === "D").sort(compareRanks);
-  const clubs: Card[] = cs.filter(
-    (c: Card) => c.suit === "C").sort(compareRanks);
+  const spades: Card[] = cs
+    .filter((c: Card) => c.suit === "S")
+    .sort(compareRanks);
+  const hearts: Card[] = cs
+    .filter((c: Card) => c.suit === "H")
+    .sort(compareRanks);
+  const diamonds: Card[] = cs
+    .filter((c: Card) => c.suit === "D")
+    .sort(compareRanks);
+  const clubs: Card[] = cs
+    .filter((c: Card) => c.suit === "C")
+    .sort(compareRanks);
 
   const spadesStr: string = spades.map(cardToString).join(" ");
   const heartsStr: string = hearts.map(cardToString).join(" ");
@@ -113,7 +118,7 @@ export function mentionToUserID(s: string): string | undefined {
   const maybeUserIDArr = userIDs.exec(s);
   if (maybeUserIDArr === null) return undefined;
   if (typeof maybeUserIDArr[0] !== "string") return undefined;
-  return maybeUserID[0];
+  return maybeUserIDArr[0];
 }
 
 export function stringToBidValue(m: string): BidValue | undefined {
@@ -133,8 +138,12 @@ export function stringToBidValue(m: string): BidValue | undefined {
     return 3;
   } else if (maybeBidValue === "4" || maybeBidValue === "four") {
     return 4;
-  } else if (maybeBidValue === "5" || maybeBidValue === "five" ||
-  maybeBidValue === "shoot" || maybeBidValue === "moon") {
+  } else if (
+    maybeBidValue === "5" ||
+    maybeBidValue === "five" ||
+    maybeBidValue === "shoot" ||
+    maybeBidValue === "moon"
+  ) {
     return 5;
   } else {
     return undefined;
@@ -197,6 +206,6 @@ export function stringToCard(m: string): Card | undefined {
   if (foundRank === undefined || foundSuit === undefined) {
     return undefined;
   } else {
-    return {rank: foundRank, suit: foundSuit};
+    return { rank: foundRank, suit: foundSuit };
   }
 }
