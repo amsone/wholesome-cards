@@ -6,7 +6,8 @@ const command: HelpCommand = {
   description: "DMs you a link to the rules.",
   executeHelp: (m: Message, args: string[]) => {
     const n =
-      'Pagat\'s rules for "cutthroat" pitch: https://www.pagat.com/allfours/pitch.html';
+      'Pagat\'s rules for "cutthroat" pitch: \
+https://www.pagat.com/allfours/pitch.html';
 
     try {
       m.author.send(n);

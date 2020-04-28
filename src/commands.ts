@@ -2,8 +2,7 @@
 import { Collection, Message } from "discord.js";
 import { Game } from "./pitch";
 
-// statically import commands and create the collection, then export getCommand
-// FIXME figure out how to do this dynamically with fs and async/await?
+// statically import commands and create the collection, then export findCommand
 import bid from "./commands/bid";
 import cards from "./commands/cards";
 import dealmein from "./commands/dealmein";
@@ -36,7 +35,7 @@ commands.set("stop", stop);
 commands.set("suit", suit);
 commands.set("trump", trump);
 commands.set("turn", turn);
-export { commands };
+export { commands }; // you still have to do this for !help
 
 export function findCommand(s: string): Command | undefined {
   const command: Command | undefined = commands.get(s);
@@ -62,8 +61,8 @@ export interface Command {
   details?: string;
 }
 
-// the help command is the only command that can be run anywhere, anytime
-// it just takes a Message and DMs the author
+// help commands are the only commands that can be run anywhere, anytime
+// they just take a Message and DM the author
 export interface HelpCommand extends Command {
   executeHelp: (m: Message, args: string[]) => void;
 }
@@ -83,7 +82,7 @@ export function isGetCommand(cmd: Command): cmd is GetCommand {
 }
 
 // StartStopCommands start or stop a Game; start requires that there isn't one
-// and stop requires that there is. start is the only command (besides help)
+// and stop requires that there is. start is the only command (besides helpers)
 // that can be run in any TextChannel; it marks the channel as the gameChannel
 export interface StartStopCommand extends Command {
   executeStartStop: (

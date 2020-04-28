@@ -22,12 +22,13 @@ const command: HelpCommand = {
 
       n = new MessageEmbed();
       n.setTitle("Help");
-      n.setDescription(`To start a new game, use ${prefix}start in the channel \
-where you want to play, and @mention the other players you're playing with.`);
+      n.setDescription(
+        `To start a new game, use ${prefix}start in the channel where you \
+want to play, and @mention the other players you're playing with.`
+      );
       n.addField(
         "Command list",
-        cmdList + "\n\n Use `help [command]` to get \
-more info about a command."
+        cmdList + "\n\n Use `help [command]` to get more info about a command."
       );
     } else {
       if (typeof command === "undefined") {

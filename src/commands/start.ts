@@ -10,9 +10,9 @@ const command: StartStopCommand = {
   usage: "@player1 @player2 @player3...",
   aliases: ["newgame", "startnewgame"],
   details:
-    "You must specify 1-7 other players to play with, and there can't \
-be a game in progress. Once you start a game, all commands (except `help`) \
-must be used in the game's channel, or in DMs.",
+    "You must specify 1-7 other players to play with, and there can't be a \
+game in progress. Once you start a game, all commands (except `help`) must be \
+used in the game's channel, or in DMs.",
   executeStartStop: (
     m: Message,
     g: Game | undefined,

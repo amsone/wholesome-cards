@@ -31,8 +31,8 @@ const command: StateChangeCommand = {
   usage: "[card]",
   aliases: ["play"],
   details:
-    "Tries to play the card you specify. You can use shorthand, like \
-'KH' for the king of hearts or '8C' for the eight of clubs, or use emoji, like \
+    "Tries to play the card you specify. You can use shorthand, like 'KH' for \
+the king of hearts or '8C' for the eight of clubs, or use emoji, like \
 '10:diamonds:', or write it out, like 'the ace of spades'.\
 \n\n\
 You don't need to use this command explicitly. If you're the active player \

@@ -7,8 +7,8 @@ const command: GetCommand = {
   description: "Shows the scores in the current game.",
   aliases: ["points", "scores"],
   details:
-    "Note that players who have left the game are included; they may \
-rejoin at any time and keep their score.\n\n\
+    "Note that players who have left the game are included; they may rejoin at \
+any time and keep their score.\n\n\
 Will either reply in-channel or in DMs, depending on your message.",
   executeGet: (m: Message, g: Game): void => {
     const scores: [User, number][] = Array.from(g.scores);

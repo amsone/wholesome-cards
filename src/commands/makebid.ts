@@ -17,8 +17,8 @@ const command: StateChangeCommand = {
   description: "Tries to make a bid for you.",
   usage: "[bid]",
   details:
-    "Tries to make the bid you specify, either 'pass' or a number \
-from 2 to 5.\n\n\
+    "Tries to make the bid you specify, either 'pass' or a number from 2 to 5.\
+\n\n\
 You don't need to use this command explicitly. If you're the active player \
 during bidding, and you say something that looks like a bid (like 'pass' or \
 '3'), it will just work.",

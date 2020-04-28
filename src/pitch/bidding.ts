@@ -55,8 +55,8 @@ export function makeBid(h: Hand, p: User, bv: BidValue): Hand {
       if (hbv > 0) {
         newBids = [...newBids, { bidder: p, value: bv }];
       } else {
-        let m = "you can't pass; since everyone passed, the dealer is forced.";
-        m += " bid";
+        const m =
+          "you can't pass; since everyone passed, the dealer is forced to bid.";
         throw new GameError(m);
       }
     } else if (bv >= hbv) {
