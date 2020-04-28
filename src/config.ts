@@ -1,2 +1,2 @@
 export const prefix = "!";
-export const token = "process.env.BOT_TOKEN";
+export const token = process.env.BOT_TOKEN;
