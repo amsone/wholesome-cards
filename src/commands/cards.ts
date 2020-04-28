@@ -1,6 +1,6 @@
 import { Card, Game, GameError } from "../pitch";
 import { GetCommand } from "../commands";
-import { Message, MessageEmbed } from "discord.js";
+import { Message } from "discord.js";
 import { cardArrayToString } from "../string-converters";
 
 const command: GetCommand = {

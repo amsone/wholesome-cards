@@ -1,7 +1,7 @@
 {
   "name": "wholesome-pitch",
   "version": "1.0.0",
-  "description": "A simple Discord bot that plays a perpetual game of pitch.",
+  "description": "Simple cards-playing Discord bot for trick-based games.",
   "main": "dist/index.js",
   "scripts": {
     "build": "npx tsc",
@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Alex Smith <alex@acroyear2.org> (https://www.acroyear2.org/)",
-  "repository": "github:amsone/wholesome-pitch",
+  "repository": "github:amsone/wholesome-cards",
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
