@@ -1,0 +1,26 @@
+{
+  "name": "wholesome-pitch",
+  "version": "1.0.0",
+  "description": "A simple Discord bot that plays a perpetual game of pitch.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node ./dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alex Smith <alex@acroyear2.org> (https://www.acroyear2.org/)",
+  "repository": "github:amsone/wholesome-pitch",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "discord.js": "^12.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^13.11.1",
+    "@types/ws": "^7.2.3",
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
+    "eslint": "^6.8.0",
+    "typescript": "^3.8.3"
+  }
+}
