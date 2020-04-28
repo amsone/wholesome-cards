@@ -13,15 +13,17 @@ export interface Card {
 
 // exported functions
 
-export function deal(players: readonly User[], handSize: number):
-ReadonlyMap<User, readonly Card[]> {
+export function deal(
+  players: readonly User[],
+  handSize: number
+): ReadonlyMap<User, readonly Card[]> {
   // make a new deck with one of each card
   const newDeck: Card[] = [];
   const ranks: Rank[] = [14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2];
   const suits: Suit[] = ["S", "H", "D", "C"];
   for (const suit of suits) {
     for (const rank of ranks) {
-      newDeck.push({rank: rank, suit: suit});
+      newDeck.push({ rank: rank, suit: suit });
     }
   }
 

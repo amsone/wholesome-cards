@@ -86,8 +86,11 @@ export function isGetCommand(cmd: Command): cmd is GetCommand {
 // and stop requires that there is. start is the only command (besides help)
 // that can be run in any TextChannel; it marks the channel as the gameChannel
 export interface StartStopCommand extends Command {
-  executeStartStop: (m: Message, g: Game | undefined, args: string[]) =>
-  Game | undefined;
+  executeStartStop: (
+    m: Message,
+    g: Game | undefined,
+    args: string[]
+  ) => Game | undefined;
 }
 
 export function isStartStopCommand(cmd: Command): cmd is StartStopCommand {

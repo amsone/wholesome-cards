@@ -1,7 +1,23 @@
-import { activePlayer, Card, currentTrickComplete, gamePointWinner, Game,
-GameError, highBidder, highBidValue, highPointWinner, jackPointWinner,
-lowPointWinner, moonPointWinner, nextHand, playCard, status, Suit, trumpSuit,
-updateScores } from "../pitch";
+import {
+  activePlayer,
+  Card,
+  currentTrickComplete,
+  gamePointWinner,
+  Game,
+  GameError,
+  highBidder,
+  highBidValue,
+  highPointWinner,
+  jackPointWinner,
+  lowPointWinner,
+  moonPointWinner,
+  nextHand,
+  playCard,
+  status,
+  Suit,
+  trumpSuit,
+  updateScores,
+} from "../pitch";
 import { announceNewHand } from "../announcements";
 import { Message, TextChannel, User } from "discord.js";
 import { cardToString, stringToCard, suitToString } from "../string-converters";
@@ -14,7 +30,8 @@ const command: StateChangeCommand = {
   description: "Tries to play a card for you.",
   usage: "[card]",
   aliases: ["play"],
-  details: "Tries to play the card you specify. You can use shorthand, like \
+  details:
+    "Tries to play the card you specify. You can use shorthand, like \
 'KH' for the king of hearts or '8C' for the eight of clubs, or use emoji, like \
 '10:diamonds:', or write it out, like 'the ace of spades'.\
 \n\n\
@@ -56,8 +73,12 @@ during a hand and you say something that looks like a card, it will just work.",
       const trumps: Suit | undefined = trumpSuit(newGame);
       const high: User | undefined = highPointWinner(newGame);
       const low: User | undefined = lowPointWinner(newGame);
-      if (typeof bidder === "undefined" || typeof trumps === "undefined" ||
-      typeof high === "undefined" || typeof low === "undefined") {
+      if (
+        typeof bidder === "undefined" ||
+        typeof trumps === "undefined" ||
+        typeof high === "undefined" ||
+        typeof low === "undefined"
+      ) {
         throw new Error("type guard, can't happen");
       }
 
@@ -88,7 +109,7 @@ during a hand and you say something that looks like a card, it will just work.",
     }
 
     return newGame;
-  }
-}
+  },
+};
 
 export default command;

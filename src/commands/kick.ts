@@ -9,7 +9,8 @@ const command: StateChangeCommand = {
   usage: "@player",
   aliases: ["remove"],
   description: "Kicks a player and starts a new hand.",
-  details: "Kicks a player and then starts a new hand. A new hand has to start \
+  details:
+    "Kicks a player and then starts a new hand. A new hand has to start \
 since it's not clear how to change tricks the kicked player was in.",
   executeStateChange: (m: Message, g: Game, args: string[]) => {
     const maybeMention: string | undefined = args[0];
@@ -27,7 +28,7 @@ since it's not clear how to change tricks the kicked player was in.",
       }
     }
     throw new GameError("you must mention a player to kick.");
-  }
-}
+  },
+};
 
 export default command;

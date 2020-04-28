@@ -10,21 +10,25 @@ const command: HelpCommand = {
   executeHelp: (m: Message, args: string[]): void => {
     let request: string | undefined = args[0];
     if (typeof request !== "undefined" && request.startsWith(prefix)) {
-      request = request.slice(prefix.length)
+      request = request.slice(prefix.length);
     }
     const command: Command | undefined = findCommand(request);
     let n: string | MessageEmbed = "";
 
     if (typeof request === "undefined") {
-      const cmdList: string = commands.map(
-      (c: Command): string => `\`${c.name}\`: ${c.description}`).join("\n");
+      const cmdList: string = commands
+        .map((c: Command): string => `\`${c.name}\`: ${c.description}`)
+        .join("\n");
 
       n = new MessageEmbed();
       n.setTitle("Help");
       n.setDescription(`To start a new game, use ${prefix}start in the channel \
 where you want to play, and @mention the other players you're playing with.`);
-      n.addField("Command list", cmdList + "\n\n Use `help [command]` to get \
-more info about a command.");
+      n.addField(
+        "Command list",
+        cmdList + "\n\n Use `help [command]` to get \
+more info about a command."
+      );
     } else {
       if (typeof command === "undefined") {
         n = "I don't recognize that command.";
@@ -57,7 +61,7 @@ more info about a command.");
     if (m.channel.type !== "dm") {
       m.react("✅");
     }
-  }
-}
+  },
+};
 
 export default command;

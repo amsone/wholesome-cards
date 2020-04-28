@@ -5,7 +5,7 @@ import { BidValue } from "./pitch/bidding";
 
 import { Card, Rank, Suit } from "./pitch/cards";
 
-import { GameError } from "./pitch/GameError"
+import { GameError } from "./pitch/GameError";
 
 import { activePlayer as activePlayerInHand } from "./pitch/hand-management";
 import { dealer as dealerInHand } from "./pitch/hand-management";
@@ -15,8 +15,7 @@ import { status as statusInHand } from "./pitch/hand-management";
 import { Status } from "./pitch/hand-management";
 
 import { currentTrick as currentTrickOfArray } from "./pitch/playing";
-import { currentTrickComplete as currentTrickCompleteInHand }
-  from "./pitch/playing";
+import { currentTrickComplete as currentTrickCompleteInHand } from "./pitch/playing";
 import { leadSuit as leadSuitOfTrick } from "./pitch/playing";
 import { playCard as playCardInHand } from "./pitch/playing";
 import { trumpSuit as trumpSuitOfArray } from "./pitch/playing";
@@ -33,7 +32,7 @@ import { User } from "discord.js";
 
 // export interfaces
 
-export { BidValue, Card, GameError, Rank, Status, Suit }
+export { BidValue, Card, GameError, Rank, Status, Suit };
 
 export interface Game {
   readonly players: ReadonlyArray<User>;
@@ -63,7 +62,7 @@ export function addPlayer(g: Game, p: User): Game {
     newScores.set(p, 0);
   }
 
-  return {players: newPlayers, scores: newScores, currentHand: g.currentHand};
+  return { players: newPlayers, scores: newScores, currentHand: g.currentHand };
 }
 
 export function currentTrickComplete(g: Game): boolean {
@@ -96,7 +95,7 @@ export function jackPointWinner(g: Game): User | undefined {
 
 export function leadSuit(g: Game): Suit | undefined {
   const t: Trick | undefined = currentTrickOfArray(g.currentHand.tricks);
-  return (typeof t === "undefined") ? undefined : leadSuitOfTrick(t);
+  return typeof t === "undefined" ? undefined : leadSuitOfTrick(t);
 }
 
 export function lowPointWinner(g: Game): User | undefined {
@@ -104,7 +103,7 @@ export function lowPointWinner(g: Game): User | undefined {
 }
 
 export function makeBid(g: Game, p: User, bv: BidValue): Game {
-  return {...g, currentHand: makeBidInHand(g.currentHand, p, bv)};
+  return { ...g, currentHand: makeBidInHand(g.currentHand, p, bv) };
 }
 
 export function moonPointWinner(g: Game): User | undefined {
@@ -125,7 +124,7 @@ export function newGame(newPlayers: User[]): Game {
 
   const newHand: Hand = setUpNewHand(dedupedPlayers);
 
-  return {players: dedupedPlayers, scores: newScores, currentHand: newHand};
+  return { players: dedupedPlayers, scores: newScores, currentHand: newHand };
 }
 
 export function nextHand(g: Game): Game {
@@ -138,11 +137,11 @@ export function nextHand(g: Game): Game {
 
   const newHand: Hand = setUpNewHand(newPlayers);
 
-  return {players: newPlayers, scores: g.scores, currentHand: newHand};
+  return { players: newPlayers, scores: g.scores, currentHand: newHand };
 }
 
 export function playCard(g: Game, p: User, c: Card): Game {
-  return {...g, currentHand: playCardInHand(g.currentHand, p, c)};
+  return { ...g, currentHand: playCardInHand(g.currentHand, p, c) };
 }
 
 export function removePlayer(g: Game, p: User): Game {
@@ -151,11 +150,11 @@ export function removePlayer(g: Game, p: User): Game {
   }
   if (g.players.length <= 2) {
     let n = `<@${p}> can't leave; the game only has 2 players. If you're done,`;
-    n += " stop the game."
+    n += " stop the game.";
     throw new GameError(n);
   }
 
-  return {...g, players: g.players.filter((q: User) => p !== q)};
+  return { ...g, players: g.players.filter((q: User) => p !== q) };
 }
 
 export function status(g: Game): Status {
@@ -170,16 +169,17 @@ export function updateScores(g: Game): Game {
   if (status(g) !== "scoring") {
     return g;
   } else {
-    const zero = ((x: number | undefined): number => x || 0);
+    const zero = (x: number | undefined): number => x || 0;
 
     const newScores: Map<User, number> = new Map(g.scores.entries());
     const scoreChanges: [User, number][] = Array.from(
-      scoreHand(g.currentHand).entries());
+      scoreHand(g.currentHand).entries()
+    );
 
     for (const [player, scoreChange] of scoreChanges) {
       newScores.set(player, zero(newScores.get(player)) + scoreChange);
     }
 
-    return {...g, scores: newScores};
+    return { ...g, scores: newScores };
   }
 }

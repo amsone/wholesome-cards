@@ -41,6 +41,6 @@ export function status(h: Hand): Status {
   } else if (h.tricks.length < 6) {
     return "playing";
   } else {
-    return (!currentTrickComplete(h)) ? "playing" : "scoring";
+    return !currentTrickComplete(h) ? "playing" : "scoring";
   }
 }

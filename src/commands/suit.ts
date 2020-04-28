@@ -16,7 +16,7 @@ const command: GetCommand = {
       m.channel.send(`${suitToString(lead, true)} were led.`);
     }
     return;
-  }
-}
+  },
+};
 
 export default command;

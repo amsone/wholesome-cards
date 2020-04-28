@@ -14,7 +14,7 @@ const command: GetCommand = {
       m.channel.send(`It's no one's turn, we're between hands.`);
     }
     return;
-  }
-}
+  },
+};
 
 export default command;

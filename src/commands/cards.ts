@@ -8,8 +8,9 @@ const command: GetCommand = {
   description: "DMs your cards to you.",
   aliases: ["hand", "myhand"],
   executeGet: (m: Message, g: Game): void => {
-    const psCards: readonly Card[] | undefined =
-    g.currentHand.playerCards.get(m.author);
+    const psCards: readonly Card[] | undefined = g.currentHand.playerCards.get(
+      m.author
+    );
     if (typeof psCards === "undefined") {
       throw new GameError("you don't have any cards right now.");
     }
@@ -28,7 +29,7 @@ const command: GetCommand = {
     }
 
     return;
-  }
-}
+  },
+};
 
 export default command;

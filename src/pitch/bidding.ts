@@ -28,7 +28,8 @@ export function highBidder(bids: readonly Bid[]): User | undefined {
   // the reverse() handles dealer steals
 
   const highBid: Bid | undefined = revBids.find(
-    (b: Bid): boolean => b.value === highBidValue(bids));
+    (b: Bid): boolean => b.value === highBidValue(bids)
+  );
 
   if (typeof highBid === "undefined") {
     return undefined;
@@ -52,7 +53,7 @@ export function makeBid(h: Hand, p: User, bv: BidValue): Hand {
     if (bv === 0) {
       // dealer may only pass if someone else has already bid
       if (hbv > 0) {
-        newBids = [...newBids, {bidder: p, value: bv}];
+        newBids = [...newBids, { bidder: p, value: bv }];
       } else {
         let m = "you can't pass; since everyone passed, the dealer is forced.";
         m += " bid";
@@ -60,17 +61,17 @@ export function makeBid(h: Hand, p: User, bv: BidValue): Hand {
       }
     } else if (bv >= hbv) {
       // dealer can steal bids
-      newBids = [...newBids, {bidder: p, value: bv}];
+      newBids = [...newBids, { bidder: p, value: bv }];
     } else {
       throw new GameError("you can't bid lower than the high bid.");
     }
   } else {
     // everyone other than the dealer can always pass
     if (bv === 0) {
-      newBids = [...newBids, {bidder: p, value: bv}];
+      newBids = [...newBids, { bidder: p, value: bv }];
     } else if (bv > hbv) {
       // everyone other than the dealer must strictly overbid
-      newBids = [...newBids, {bidder: p, value: bv}];
+      newBids = [...newBids, { bidder: p, value: bv }];
     } else {
       throw new GameError("you must bid more than the high bid.");
     }
@@ -86,5 +87,5 @@ export function makeBid(h: Hand, p: User, bv: BidValue): Hand {
     newAPI = h.players.indexOf(bidder);
   }
 
-  return {...h, bids: newBids, activePlayerIndex: newAPI};
+  return { ...h, bids: newBids, activePlayerIndex: newAPI };
 }

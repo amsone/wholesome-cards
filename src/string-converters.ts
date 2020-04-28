@@ -109,10 +109,11 @@ export function cardArrayToString(cs: ReadonlyArray<Card>,
 }
 
 export function mentionToUserID(s: string): string | undefined {
-  const maybeUserID = s.match(/^<@!?(\d+)>$/);
-  if (maybeUserID === null) return undefined;
-  if (typeof maybeUserID[1] !== "string") return undefined;
-  return maybeUserID[1];
+  const userIDs = /^<@!?(\d+)>$/;
+  const maybeUserIDArr = userIDs.exec(s);
+  if (maybeUserIDArr === null) return undefined;
+  if (typeof maybeUserIDArr[0] !== "string") return undefined;
+  return maybeUserID[0];
 }
 
 export function stringToBidValue(m: string): BidValue | undefined {

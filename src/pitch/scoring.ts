@@ -13,15 +13,18 @@ function tricksToPlays(ts: readonly Trick[]): readonly Play[] {
 
 function cardsWon(ts: readonly Trick[], p: User): readonly Card[] {
   const tricksWon: Trick[] = ts.filter(
-    (t: Trick): boolean => trickWinner(ts, t) === p);
+    (t: Trick): boolean => trickWinner(ts, t) === p
+  );
   const playsInTricksWon: readonly Play[] = tricksToPlays(tricksWon);
   return playsInTricksWon.map((pl: Play): Card => pl.card);
 }
 
 function cardWinner(ts: readonly Trick[], c: Card): User | undefined {
-  const fromTrick: Trick | undefined = ts.find(
-  (t: Trick): boolean => t.some(
-  (pl: Play): boolean => pl.card.rank === c.rank && pl.card.suit === c.suit));
+  const fromTrick: Trick | undefined = ts.find((t: Trick): boolean =>
+    t.some(
+      (pl: Play): boolean => pl.card.rank === c.rank && pl.card.suit === c.suit
+    )
+  );
 
   if (typeof fromTrick === "undefined") return undefined;
 
@@ -41,8 +44,9 @@ export function highPointWinner(h: Hand): User | undefined {
   if (typeof trumps === "undefined") return undefined; // no one played yet
 
   const highTrump: Card = trumpsPlayed(h.tricks).reduce(
-  (c1: Card, c2: Card): Card => (c1.rank > c2.rank) ? c1 : c2,
-  {rank: 2, suit: trumps}); // the dummy card provided here will always lose
+    (c1: Card, c2: Card): Card => (c1.rank > c2.rank ? c1 : c2),
+    { rank: 2, suit: trumps }
+  ); // the dummy card provided here will always lose
   return cardWinner(h.tricks, highTrump);
 }
 
@@ -51,14 +55,16 @@ export function lowPointWinner(h: Hand): User | undefined {
   if (typeof trumps === "undefined") return undefined; // no one played yet
 
   const lowTrump: Card = trumpsPlayed(h.tricks).reduce(
-  (c1: Card, c2: Card): Card => (c1.rank < c2.rank) ? c1 : c2,
-  {rank: 14, suit: trumps}); // the dummy card provided here will always lose
+    (c1: Card, c2: Card): Card => (c1.rank < c2.rank ? c1 : c2),
+    { rank: 14, suit: trumps }
+  ); // the dummy card provided here will always lose
   return cardWinner(h.tricks, lowTrump);
 }
 
 export function jackPointWinner(h: Hand): User | undefined {
   const jackOfTrumps: Card | undefined = trumpsPlayed(h.tricks).find(
-  (c: Card): boolean => c.rank === 11);
+    (c: Card): boolean => c.rank === 11
+  );
 
   if (typeof jackOfTrumps === "undefined") {
     return undefined;
@@ -68,8 +74,9 @@ export function jackPointWinner(h: Hand): User | undefined {
 }
 
 export function gamePointWinner(h: Hand): User | undefined {
-  const cardsToGamePts = ((cs: readonly Card[]): number => cs.reduce(
-    (sum: number, c: Card) => { switch (c.rank) {
+  const cardsToGamePts = (cs: readonly Card[]): number =>
+    cs.reduce((sum: number, c: Card) => {
+      switch (c.rank) {
         case 14:
           return sum + 4;
         case 13:
@@ -83,10 +90,11 @@ export function gamePointWinner(h: Hand): User | undefined {
         default:
           return sum;
       }
-    }, 0));
+    }, 0);
 
   const playerGamePts: number[] = h.players.map((p: User): number =>
-    cardsToGamePts(cardsWon(h.tricks, p)));
+    cardsToGamePts(cardsWon(h.tricks, p))
+  );
 
   const mostGame: number = Math.max(...playerGamePts);
 
@@ -109,7 +117,7 @@ export function moonPointWinner(h: Hand): User | undefined {
   const bidderCardsWon: readonly Card[] = cardsWon(h.tricks, bidder);
 
   // you only receive this point if you win every card
-  return (bidderCardsWon.length === h.players.length * 6) ? bidder : undefined;
+  return bidderCardsWon.length === h.players.length * 6 ? bidder : undefined;
 }
 
 // main scorer
@@ -132,7 +140,7 @@ export function scoreHand(h: Hand): ReadonlyMap<User, number> {
   }
 
   const scoreChanges: Map<User, number> = new Map();
-  const zero = ((x: number | undefined): number => x || 0);
+  const zero = (x: number | undefined): number => x || 0;
 
   // award High, Low, Jack, and Game
   scoreChanges.set(highWinner, 1);

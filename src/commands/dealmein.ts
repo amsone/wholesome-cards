@@ -10,7 +10,7 @@ const command: StateChangeCommand = {
     const newGame: Game = addPlayer(g, m.author);
     m.reply("you'll be dealt into the next hand.");
     return newGame;
-  }
-}
+  },
+};
 
 export default command;

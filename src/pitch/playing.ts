@@ -21,7 +21,7 @@ export function currentTrick(ts: readonly Trick[]): Trick | undefined {
 export function currentTrickComplete(h: Hand): boolean {
   const t: Trick | undefined = currentTrick(h.tricks);
   if (typeof t === "undefined") return true;
-  return t.length === h.players.length
+  return t.length === h.players.length;
 }
 
 export function leadSuit(t: Trick | undefined): Suit | undefined {
@@ -39,22 +39,26 @@ export function trumpSuit(ts: readonly Trick[]): Suit | undefined {
   return firstPlay.card.suit;
 }
 
-export function trickWinner(ts: readonly Trick[], t: Trick):
-User | undefined {
+export function trickWinner(ts: readonly Trick[], t: Trick): User | undefined {
   const trumps: Suit | undefined = trumpSuit(ts);
   if (typeof trumps === "undefined") return undefined;
 
   const lead: Suit | undefined = leadSuit(t);
   if (typeof lead === "undefined") return undefined;
 
-  const winningSuit: Suit = (t.some(
-  (pl: Play): boolean => pl.card.suit === trumps)) ? trumps : lead;
+  const winningSuit: Suit = t.some(
+    (pl: Play): boolean => pl.card.suit === trumps
+  )
+    ? trumps
+    : lead;
 
   const winningSuitPlays: Play[] = t.filter(
-  (pl: Play): boolean => pl.card.suit === winningSuit);
+    (pl: Play): boolean => pl.card.suit === winningSuit
+  );
 
   const winningPlay: Play = winningSuitPlays.reduce(
-  (pl1: Play, pl2: Play): Play => (pl1.card.rank > pl2.card.rank) ? pl1 : pl2);
+    (pl1: Play, pl2: Play): Play => (pl1.card.rank > pl2.card.rank ? pl1 : pl2)
+  );
 
   return winningPlay.player;
 }
@@ -71,8 +75,9 @@ export function playCard(h: Hand, p: User, c: Card): Hand {
   }
 
   // check if p has c in their hand
-  if (!psCards.some(
-  (d: Card): boolean => c.rank === d.rank && c.suit === d.suit)) {
+  if (
+    !psCards.some((d: Card): boolean => c.rank === d.rank && c.suit === d.suit)
+  ) {
     throw new GameError("you can't play a card you don't have.");
   }
 
@@ -82,8 +87,11 @@ export function playCard(h: Hand, p: User, c: Card): Hand {
     // ...p isn't playing trump (bc you can always play any trump you have)
     if (c.suit !== trumpSuit(h.tricks)) {
       // ...and p could follow suit (bc if you can't, you can play anything)
-      if (psCards.some(
-      (d: Card): boolean => d.suit === leadSuit(currentTrick(h.tricks)))) {
+      if (
+        psCards.some(
+          (d: Card): boolean => d.suit === leadSuit(currentTrick(h.tricks))
+        )
+      ) {
         // ...but they're not following
         if (c.suit !== leadSuit(currentTrick(h.tricks))) {
           throw new GameError("you must follow suit (or play trumps).");
@@ -95,9 +103,11 @@ export function playCard(h: Hand, p: User, c: Card): Hand {
 
   // first, take c out of p's hand
   const newPsCards: readonly Card[] = psCards.filter(
-  (d: Card): boolean => (c.suit !== d.suit || c.rank !== d.rank));
+    (d: Card): boolean => c.suit !== d.suit || c.rank !== d.rank
+  );
   const newPlayerCards: Map<User, readonly Card[]> = new Map(
-  h.playerCards.entries());
+    h.playerCards.entries()
+  );
   newPlayerCards.set(p, newPsCards);
 
   // set up h.tricks's return values
@@ -105,12 +115,14 @@ export function playCard(h: Hand, p: User, c: Card): Hand {
   let newTricks: readonly Trick[];
 
   // add {p: p, c: c} to the current trick (or start a new one, depending)
-  if (typeof newCurrTrick === "undefined" ||
-  newCurrTrick.length === h.players.length) {
-    newCurrTrick = [{player: p, card: c}];
+  if (
+    typeof newCurrTrick === "undefined" ||
+    newCurrTrick.length === h.players.length
+  ) {
+    newCurrTrick = [{ player: p, card: c }];
     newTricks = [...h.tricks, newCurrTrick];
   } else {
-    newCurrTrick = [...newCurrTrick, {player: p, card: c}];
+    newCurrTrick = [...newCurrTrick, { player: p, card: c }];
     newTricks = [...h.tricks.slice(0, -1), newCurrTrick];
   }
 
@@ -120,11 +132,15 @@ export function playCard(h: Hand, p: User, c: Card): Hand {
     const winner: User | undefined = trickWinner(newTricks, newCurrTrick);
     // type guard, can't happen
     if (typeof winner === "undefined") {
-      throw new Error ("complete trick had no winner, should be impossible");
+      throw new Error("complete trick had no winner, should be impossible");
     }
     newAPI = h.players.indexOf(winner);
   }
 
-  return {...h, playerCards: newPlayerCards, tricks: newTricks,
-  activePlayerIndex: newAPI};
+  return {
+    ...h,
+    playerCards: newPlayerCards,
+    tricks: newTricks,
+    activePlayerIndex: newAPI,
+  };
 }

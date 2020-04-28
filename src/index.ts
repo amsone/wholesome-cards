@@ -1,9 +1,19 @@
 import { activePlayer, BidValue, Card, Game, GameError, status } from "./pitch";
-import { bidValueToString, cardToString, stringToBidValue, stringToCard
-  } from "./string-converters";
+import {
+  bidValueToString,
+  cardToString,
+  stringToBidValue,
+  stringToCard,
+} from "./string-converters";
 import { Channel, Client, Message } from "discord.js";
-import { Command, findCommand, isGetCommand, isHelpCommand,
-  isStartStopCommand, isStateChangeCommand } from "./commands";
+import {
+  Command,
+  findCommand,
+  isGetCommand,
+  isHelpCommand,
+  isStartStopCommand,
+  isStateChangeCommand,
+} from "./commands";
 import { prefix, token } from "./config";
 
 // set up state holders
@@ -29,11 +39,14 @@ client.on("message", (m: Message): void => {
 
   // first, handle non-command messages from activePlayer in gameChannel
   // and see if they're really bids or plays
-  if (!commandName.startsWith(prefix) && typeof g !== "undefined"
-  && gameChannel === m.channel && m.author === activePlayer(g)) {
+  if (
+    !commandName.startsWith(prefix) &&
+    typeof g !== "undefined" &&
+    gameChannel === m.channel &&
+    m.author === activePlayer(g)
+  ) {
     if (status(g) === "bidding") {
-      const maybeBidValue: BidValue | undefined = stringToBidValue(
-      commandName);
+      const maybeBidValue: BidValue | undefined = stringToBidValue(commandName);
 
       if (typeof maybeBidValue !== "undefined") {
         // this is really a bid

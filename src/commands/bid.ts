@@ -23,7 +23,7 @@ const command: GetCommand = {
       m.channel.send(n);
     }
     return;
-  }
-}
+  },
+};
 
 export default command;
