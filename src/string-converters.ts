@@ -117,8 +117,8 @@ export function mentionToUserID(s: string): string | undefined {
   const userIDs = /^<@!?(\d+)>$/;
   const maybeUserIDArr = userIDs.exec(s);
   if (maybeUserIDArr === null) return undefined;
-  if (typeof maybeUserIDArr[0] !== "string") return undefined;
-  return maybeUserIDArr[0];
+  if (typeof maybeUserIDArr[1] !== "string") return undefined;
+  return maybeUserIDArr[1];
 }
 
 export function stringToBidValue(m: string): BidValue | undefined {
