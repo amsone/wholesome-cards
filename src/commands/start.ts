@@ -33,10 +33,11 @@ used in the game's channel, or in DMs.",
     const maybePlayers: (User | undefined)[] = playerIDs.map((id: string):
       | User
       | undefined => m.client.users.cache.get(id));
-    const players: User[] = [m.author];
+    const players: User[] = [];
     for (const p of maybePlayers) {
       if (typeof p !== "undefined") players.push(p);
     }
+    players.push(m.author);
 
     const ng: Game = newGame(players);
     announceNewHand(m.channel as TextChannel, ng);

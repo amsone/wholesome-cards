@@ -32,7 +32,7 @@ client.on("message", (m: Message): void => {
   if (m.author.bot) return;
 
   // set up command parsing
-  let args: string[] = m.content.toLowerCase().split(/ +/, 9);
+  let args: string[] = m.content.toLowerCase().split(/:| +/, 9);
   // (only need 9 above because the longest command, !start, takes max 8 args)
   let commandName: string | undefined = args.shift();
   if (typeof commandName === "undefined") return; // type guard, can't happen
@@ -54,7 +54,7 @@ client.on("message", (m: Message): void => {
         args = [bidValueToString(maybeBidValue).toLowerCase()];
       }
     } else if (status(g) === "playing") {
-      const maybeCardName: string = commandName + args.slice(0, 3).join(" ");
+      const maybeCardName: string = commandName + args.slice(0, 5).join(" ");
       const maybeCard: Card | undefined = stringToCard(maybeCardName);
 
       if (typeof maybeCard !== "undefined") {

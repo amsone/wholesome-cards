@@ -42,12 +42,17 @@ during a hand and you say something that looks like a card, it will just work.",
     if (typeof card === "undefined") {
       throw new GameError("you must name a card you want to play.");
     }
+    const isFirstCard: boolean = currentTrickComplete(g);
 
     let newGame = playCard(g, m.author, card);
 
     // play successful (otherwise playCard would have thrown)
-    m.react("✅");
-    let n = `<@${m.author}> played ${cardToString(card)}`;
+    let n = `<@${m.author}> `;
+    if (isFirstCard) {
+      n += `led ${cardToString(card)} to open the trick`;
+    } else {
+      n += `played ${cardToString(card)}`;
+    }
 
     // report the next player (and the winner if applicable)
     if (currentTrickComplete(newGame)) {
@@ -98,7 +103,7 @@ during a hand and you say something that looks like a card, it will just work.",
 
       const moon: User | undefined = moonPointWinner(newGame);
       if (typeof moon !== "undefined") {
-        m.channel.send(`${moon} successfully shot the moon!`);
+        m.channel.send(`<@${moon}> successfully shot the moon!`);
       }
 
       // update scores, report them, and start a new hand

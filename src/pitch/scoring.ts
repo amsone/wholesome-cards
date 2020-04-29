@@ -116,8 +116,11 @@ export function moonPointWinner(h: Hand): User | undefined {
 
   const bidderCardsWon: readonly Card[] = cardsWon(h.tricks, bidder);
 
-  // you only receive this point if you win every card
-  return bidderCardsWon.length === h.players.length * 6 ? bidder : undefined;
+  // you only receive this point if you win every card & there was a Jack
+  const win =
+    bidderCardsWon.length === h.players.length * 6 &&
+    jackPointWinner(h) === bidder;
+  return win ? bidder : undefined;
 }
 
 // main scorer
