@@ -149,7 +149,7 @@ export function removePlayer(g: Game, p: User): Game {
     throw new GameError(`<@${p}> already isn't in the game!`);
   }
   if (g.players.length <= 2) {
-    let n = `<@${p}> can't leave; the game only has 2 players. If you're done,`;
+    let n = `no one can leave; the game only has 2 players. If you're done,`;
     n += " stop the game.";
     throw new GameError(n);
   }
