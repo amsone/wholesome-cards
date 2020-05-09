@@ -13,7 +13,9 @@ const command: GetCommand = {
     if (typeof trump === "undefined") {
       m.channel.send("Trumps haven't been led yet.");
     } else {
-      m.channel.send(`${suitToString(trump, true)} are trump.`);
+      let s: string = suitToString(trump, true);
+      s = s.slice(0, 1).toUpperCase().concat(s.slice(1));
+      m.channel.send(`${s} are trump.`);
     }
     return;
   },

@@ -18,6 +18,7 @@ import stop from "./commands/stop";
 import suit from "./commands/suit";
 import trump from "./commands/trump";
 import turn from "./commands/turn";
+import version from "./commands/version";
 
 const commands: Collection<string, Command> = new Collection();
 commands.set("bid", bid);
@@ -35,6 +36,7 @@ commands.set("stop", stop);
 commands.set("suit", suit);
 commands.set("trump", trump);
 commands.set("turn", turn);
+commands.set("version", version);
 export { commands }; // you still have to do this for !help
 
 export function findCommand(s: string): Command | undefined {

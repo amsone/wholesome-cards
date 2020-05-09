@@ -13,7 +13,9 @@ export function announceNewHand(ch: TextChannel, g: Game): void {
       throw new GameError("you don't have any cards right now.");
     }
 
-    const n = "**Your cards**: " + cardArrayToString(psCards);
+    const n = new MessageEmbed();
+    n.setTitle("Your cards");
+    n.setDescription(cardArrayToString(psCards));
 
     try {
       player.send(n);

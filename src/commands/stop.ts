@@ -5,7 +5,7 @@ import { StartStopCommand } from "../commands";
 const command: StartStopCommand = {
   name: "stop",
   description: "Stops the active game.",
-  aliases: ["stopgame"],
+  aliases: ["end", "stopgame"],
   details: "Note: This erases everything, including everyone's scores.",
   executeStartStop: (
     m: Message,

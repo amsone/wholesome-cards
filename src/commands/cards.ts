@@ -1,6 +1,6 @@
 import { Card, Game, GameError } from "../pitch";
 import { GetCommand } from "../commands";
-import { Message } from "discord.js";
+import { Message, MessageEmbed } from "discord.js";
 import { cardArrayToString } from "../string-converters";
 
 const command: GetCommand = {
@@ -15,7 +15,9 @@ const command: GetCommand = {
       throw new GameError("you don't have any cards right now.");
     }
 
-    const n = "**Your cards**: " + cardArrayToString(psCards);
+    const n = new MessageEmbed();
+    n.setTitle("Your cards");
+    n.setDescription(cardArrayToString(psCards));
 
     try {
       m.author.send(n);

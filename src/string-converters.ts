@@ -50,13 +50,13 @@ export function suitToString(s: Suit, longName?: boolean): string {
   } else {
     switch (s) {
       case "S":
-        return ":spades:";
+        return ":spadecard:";
       case "H":
         return ":hearts:";
       case "D":
         return ":diamonds:";
       default:
-        return ":clubs:";
+        return ":clubcard:";
     }
   }
 }

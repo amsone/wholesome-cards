@@ -16,20 +16,36 @@ const command: HelpCommand = {
     let n: string | MessageEmbed = "";
 
     if (typeof request === "undefined") {
-      const cmdList: string = commands
+      const helpCmdList: string = commands
+        .filter(isHelpCommand)
+        .map((c: Command): string => `\`${c.name}\`: ${c.description}`)
+        .join("\n");
+
+      const startStopCmdList: string = commands
+        .filter(isStartStopCommand)
+        .map((c: Command): string => `\`${c.name}\`: ${c.description}`)
+        .join("\n");
+
+      const getCmdList: string = commands
+        .filter(isGetCommand)
+        .map((c: Command): string => `\`${c.name}\`: ${c.description}`)
+        .join("\n");
+
+      const stateChangeCmdList: string = commands
+        .filter(isStateChangeCommand)
         .map((c: Command): string => `\`${c.name}\`: ${c.description}`)
         .join("\n");
 
       n = new MessageEmbed();
       n.setTitle("Help");
       n.setDescription(
-        `To start a new game, use ${prefix}start in the channel where you \
-want to play, and @mention the other players you're playing with.`
+        "Here are all the commands I support. Use `help [command]` to get more \
+info about a specific command."
       );
-      n.addField(
-        "Command list",
-        cmdList + "\n\n Use `help [command]` to get more info about a command."
-      );
+      n.addField("Help commands", helpCmdList);
+      n.addField("Starting and stopping games", startStopCmdList);
+      n.addField("Getting info about a game", getCmdList);
+      n.addField("Playing", stateChangeCmdList);
     } else {
       if (typeof command === "undefined") {
         n = "I don't recognize that command.";

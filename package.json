@@ -1,6 +1,6 @@
 {
-  "name": "wholesome-pitch",
-  "version": "1.0.0",
+  "name": "wholesome-cards",
+  "version": "1.1.0",
   "description": "Simple cards-playing Discord bot for trick-based games.",
   "main": "dist/index.js",
   "scripts": {

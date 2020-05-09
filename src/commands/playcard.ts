@@ -74,12 +74,10 @@ during a hand and you say something that looks like a card, it will just work.",
 
     // report the game end, if applicable
     if (status(newGame) === "scoring") {
-      const bidder: User | undefined = highBidder(newGame);
       const trumps: Suit | undefined = trumpSuit(newGame);
       const high: User | undefined = highPointWinner(newGame);
       const low: User | undefined = lowPointWinner(newGame);
       if (
-        typeof bidder === "undefined" ||
         typeof trumps === "undefined" ||
         typeof high === "undefined" ||
         typeof low === "undefined"
@@ -97,7 +95,7 @@ during a hand and you say something that looks like a card, it will just work.",
 
       n = `The hand is over. <@${highBidder(newGame)}> bid `;
       n += `${highBidValue(newGame)} in ${suitToString(trumps, true)} to `;
-      n += `start. <@${high}> got High, <@${high}> got Low, ${jackString} `;
+      n += `start. <@${high}> got High, <@${low}> got Low, ${jackString} `;
       n += `Jack, and ${gameString} Game.`;
       m.channel.send(n);
 
