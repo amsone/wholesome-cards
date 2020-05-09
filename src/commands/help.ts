@@ -27,22 +27,22 @@ const command: HelpCommand = {
     if (typeof request === "undefined") {
       const helpCmdList: string = commands
         .filter((c: Command): boolean => isHelpCommand(c))
-        .map((c: Command): string => `\`${c.name}\`: ${c.description}`)
-        .join("\n");
+        .map((c: Command): string => `\`${c.name}\``)
+        .join(" ");
       const startStopCmdList: string = commands
         .filter((c: Command): boolean => isStartStopCommand(c))
-        .map((c: Command): string => `\`${c.name}\`: ${c.description}`)
-        .join("\n");
+        .map((c: Command): string => `\`${c.name}\``)
+        .join(" ");
 
       const getCmdList: string = commands
         .filter((c: Command): boolean => isGetCommand(c))
-        .map((c: Command): string => `\`${c.name}\`: ${c.description}`)
-        .join("\n");
+        .map((c: Command): string => `\`${c.name}\``)
+        .join(" ");
 
       const stateChangeCmdList: string = commands
         .filter((c: Command): boolean => isStateChangeCommand(c))
-        .map((c: Command): string => `\`${c.name}\`: ${c.description}`)
-        .join("\n");
+        .map((c: Command): string => `\`${c.name}\``)
+        .join(" ");
 
       n = new MessageEmbed();
       n.setTitle("Help");
