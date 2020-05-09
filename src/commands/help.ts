@@ -1,6 +1,15 @@
-import { commands, Command, findCommand, HelpCommand } from "../commands";
+import {
+  commands,
+  Command,
+  findCommand,
+  HelpCommand,
+  isGetCommand,
+  isHelpCommand,
+  isStartStopCommand,
+  isStateChangeCommand,
+} from "../commands";
 import { Message, MessageEmbed } from "discord.js";
-import { prefix } from "../config";
+import { prefix } from "../config.json";
 
 const command: HelpCommand = {
   name: "help",

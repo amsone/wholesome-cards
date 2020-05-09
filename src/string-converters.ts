@@ -50,13 +50,13 @@ export function suitToString(s: Suit, longName?: boolean): string {
   } else {
     switch (s) {
       case "S":
-        return ":spadecard:";
+        return ":spadecard:"; // requires a custom emoji to deal w dark mode
       case "H":
         return ":hearts:";
       case "D":
         return ":diamonds:";
       default:
-        return ":clubcard:";
+        return ":clubcard:"; // requires a custom emoji to deal w dark mode
     }
   }
 }

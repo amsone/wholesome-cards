@@ -1,6 +1,6 @@
 import { activePlayer, dealer, Game, GameError } from "./pitch";
 import { cardArrayToString } from "./string-converters";
-import { TextChannel } from "discord.js";
+import { MessageEmbed, TextChannel } from "discord.js";
 
 export function announceNewHand(ch: TextChannel, g: Game): void {
   const n = `A new hand has started! <@${dealer(g)}> is the dealer; \

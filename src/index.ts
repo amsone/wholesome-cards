@@ -14,7 +14,7 @@ import {
   isStartStopCommand,
   isStateChangeCommand,
 } from "./commands";
-import { prefix, token } from "./config";
+import { prefix } from "./config.json";
 
 // set up state holders
 const client = new Client();
@@ -144,4 +144,4 @@ client.on("message", (m: Message): void => {
 
 // log in
 
-client.login(token);
+client.login(process.env.BOT_TOKEN);
