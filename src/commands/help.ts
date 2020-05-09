@@ -9,7 +9,7 @@ import {
   isStateChangeCommand,
 } from "../commands";
 import { Message, MessageEmbed } from "discord.js";
-import { prefix } from "../config.json";
+import { prefix } from "../config";
 
 const command: HelpCommand = {
   name: "help",
@@ -26,22 +26,21 @@ const command: HelpCommand = {
 
     if (typeof request === "undefined") {
       const helpCmdList: string = commands
-        .filter(isHelpCommand)
+        .filter((c: Command): boolean => isHelpCommand(c))
         .map((c: Command): string => `\`${c.name}\`: ${c.description}`)
         .join("\n");
-
       const startStopCmdList: string = commands
-        .filter(isStartStopCommand)
+        .filter((c: Command): boolean => isStartStopCommand(c))
         .map((c: Command): string => `\`${c.name}\`: ${c.description}`)
         .join("\n");
 
       const getCmdList: string = commands
-        .filter(isGetCommand)
+        .filter((c: Command): boolean => isGetCommand(c))
         .map((c: Command): string => `\`${c.name}\`: ${c.description}`)
         .join("\n");
 
       const stateChangeCmdList: string = commands
-        .filter(isStateChangeCommand)
+        .filter((c: Command): boolean => isStateChangeCommand(c))
         .map((c: Command): string => `\`${c.name}\`: ${c.description}`)
         .join("\n");
 

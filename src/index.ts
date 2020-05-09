@@ -14,7 +14,7 @@ import {
   isStartStopCommand,
   isStateChangeCommand,
 } from "./commands";
-import { prefix } from "./config.json";
+import { prefix } from "./config";
 
 // set up state holders
 const client = new Client();
